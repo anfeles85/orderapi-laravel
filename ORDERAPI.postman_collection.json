@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "15474930-3b5f-40e2-b1cb-8fbec0f24b25",
+		"name": "ORDERAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4382555",
+		"_collection_link": "https://grey-robot-745904.postman.co/workspace/SENA~237d4b7a-fc73-463d-92a4-00fc2a00a5f8/collection/4382555-15474930-3b5f-40e2-b1cb-8fbec0f24b25?action=share&source=collection_link&creator=4382555"
+	},
+	"item": [
+		{
+			"name": "Causal",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/causal",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"causal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/causal/2",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"causal",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Causal API\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/causal",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"causal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
