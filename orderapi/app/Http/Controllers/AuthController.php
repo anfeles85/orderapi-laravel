@@ -100,4 +100,23 @@ class AuthController extends Controller
             'message' => 'Sesión cerrada exitosamente'
         ], Response::HTTP_OK);
     }
+
+    public function register(Request $request)
+    {
+        $data = $this->applyValidator($request);
+
+        if (!empty($data)) {
+            return $data;
+        }
+        
+        $request['password'] =  bcrypt($request['password']);
+        $user = User::create($request->all());
+        
+        $response = [
+            'message' => 'Registro creado exitosamente',
+            'user'  =>  $user
+        ];
+
+        return response()->json($response, Response::HTTP_CREATED);        
+    }
 }
