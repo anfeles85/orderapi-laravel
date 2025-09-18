@@ -6,6 +6,8 @@ use App\Models\Activity;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -60,8 +62,25 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $order->load(['causal', 'observation']);
-        return response()->json($order, Response::HTTP_OK);
+        //se carga la orden con las actividades que tiene asociadas en order_activity
+        $order->load(['causal', 'observation', 'activities']);
+         //consultar actividades disponibles
+        $query = DB::select("SELECT * FROM activity WHERE activity.id NOT IN (
+                                SELECT order_activity.activity_id FROM order_activity
+                                WHERE order_activity.order_id = ?)", [$order->id]);
+
+        
+        $availableActivities = collect($query)->map(function ($item) {
+            return (array) $item; // Convierte stdClass a array asociativo
+        });
+
+        
+        $response = [
+            "order" => $order,
+            "availableActivities" => $availableActivities
+        ];
+
+        return response()->json($response, Response::HTTP_OK);
     }
 
     /**
